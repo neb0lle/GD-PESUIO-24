@@ -14,20 +14,31 @@ const gl = WebGLDebugUtils.makeDebugContext(canvas.getContext("webgl2"));
 if (gl === null) {
     alert("Unable to initialize WebGL.");
 } else {
+	// SHADERS
     const vert = Shader.compileShader(gl, vertexShaderSource, gl.VERTEX_SHADER);
     const frag = Shader.compileShader(gl, fragmentShaderSource, gl.FRAGMENT_SHADER);
 
     const shaderProgram = new Shader(gl);
     shaderProgram.createShaders(vert, frag);
 
+	// DATA
     const model = new Triangle1(gl);
     model.setup();
 
     gl.useProgram(shaderProgram.program);
 
+	// UNIFORMS
+    const startTime = performance.now();
+    let currentTime, elapsedTime;
+    const uTimeLocation = gl.getUniformLocation(shaderProgram.program, "uTime");
+
     gl.clearColor(0, 0, 0, 1);
 
     function renderLoop() {
+        currentTime = performance.now();
+        elapsedTime = (currentTime - startTime) / 1000;
+        gl.uniform1f(uTimeLocation, elapsedTime);
+
         gl.clear(gl.COLOR_BUFFER_BIT);
         model.render();
 
