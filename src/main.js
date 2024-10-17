@@ -32,6 +32,9 @@ if (gl === null) {
     let currentTime, elapsedTime;
     const uTimeLocation = gl.getUniformLocation(shaderProgram.program, "uTime");
 
+    const uResolutionLocation = gl.getUniformLocation(globalShader.program, "uResolution");
+    gl.uniform2fv(uResolutionLocation, resolution);
+
     gl.clearColor(0, 0, 0, 1);
 
     function renderLoop() {
