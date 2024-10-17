@@ -8,5 +8,5 @@ uniform float uTime;
 out vec4 fragColor;
 
 void main() {
-    fragColor = vec4(vColor, 1.0);
+    fragColor = vec4(vColor.r*sin(uTime),vColor.gb*(1.0-sin(uTime)), 1.0);
 }
