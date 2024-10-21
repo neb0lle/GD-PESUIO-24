@@ -1,12 +1,13 @@
 #version 300 es
 precision highp float;
 
-in vec3 vColor;
+in vec2 vTextureCoord;
 
 uniform float uTime;
+uniform sampler2D uSampler;
 
 out vec4 fragColor;
 
 void main() {
-    fragColor = vec4(vColor.r*sin(uTime),vColor.gb*(1.0-sin(uTime)), 1.0);
+	fragColor = vec4(texture(uSampler,vTextureCoord).rgba);
 }

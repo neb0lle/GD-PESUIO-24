@@ -1,8 +1,9 @@
 import Shader from "./Shader";
 import Texture from "./Texture";
-import { Triangle1 } from "./Model";
+import { TexMap } from "./Model";
 import vertexShaderSource from "./shaders/vert.glsl";
 import fragmentShaderSource from "./shaders/frag.glsl";
+import tex0 from "./tex0.jpeg"
 
 const canvas = document.querySelector("#glcanvas");
 canvas.width = window.innerWidth;
@@ -22,7 +23,10 @@ if (gl === null) {
     shaderProgram.createShaders(vert, frag);
 
 	// DATA
-    const model = new Triangle1(gl);
+	const tex = new Texture(gl,0);
+	tex.createTex(tex0,225,225)
+
+    const model = new TexMap(gl);
     model.setup();
 
     gl.useProgram(shaderProgram.program);
@@ -34,6 +38,9 @@ if (gl === null) {
 
     const uResolutionLocation = gl.getUniformLocation(shaderProgram.program, "uResolution");
     gl.uniform2fv(uResolutionLocation, resolution);
+
+    const uSamplerLocation = gl.getUniformLocation(shaderProgram.program, "uSampler");
+    gl.uniform1i(uSamplerLocation, 0);
 
     gl.clearColor(0, 0, 0, 1);
 
