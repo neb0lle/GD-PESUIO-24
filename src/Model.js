@@ -47,12 +47,12 @@ export class Triangle extends Model {
 export class TexMap extends Model {
 	setup() {
 		const data = new Float32Array([
-			-0.5, -0.5, 0.0, 0.0, 0.0,
-			0.5, -0.5, 0.0, 1.0, 0.0,
-			-0.5, 0.5, 0.0, 0.0, 1.0,
-			 0.5, -0.5, 0.0, 1.0, 0.0,
-			0.5,  0.5, 0.0, 1.0, 1.0,
-			-0.5, 0.5, 0.0, 0.0, 1.0,
+			-0.1, -0.1, 0.0, 0.0, 0.0,
+			0.1, -0.1, 0.0, 1.0, 0.0,
+			-0.1, 0.1, 0.0, 0.0, 1.0,
+			 0.1, -0.1, 0.0, 1.0, 0.0,
+			0.1,  0.1, 0.0, 1.0, 1.0,
+			-0.1, 0.1, 0.0, 0.0, 1.0,
 		]);
 
 		this.vbo = Model.createBuffer(this.gl, data, this.gl.STATIC_DRAW);
