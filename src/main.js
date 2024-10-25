@@ -116,7 +116,7 @@ if (gl === null) {
 			modelViewMatrix,
 			modelViewMatrix,
 			Math.PI / 180,
-			[1, 0, 0]
+			[1, 1, 1]
 		);
 
 		gl.uniformMatrix4fv(
