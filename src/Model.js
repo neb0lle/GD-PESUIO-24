@@ -70,3 +70,128 @@ export class TexMap extends Model {
 		this.gl.drawArrays(this.gl.TRIANGLES, 0, 6);
 	}
 }
+
+export class Cube extends Model {
+	setup() {
+		const pos = new Float32Array([
+			-0.5, -0.5, -0.5,
+			-0.5, -0.5, 0.5,
+			-0.5, 0.5, 0.5,
+
+			-0.5, -0.5, -0.5,
+			-0.5, 0.5, 0.5,
+			-0.5, 0.5, -0.5,
+
+			0.5, 0.5, -0.5,
+			-0.5, -0.5, -0.5,
+			-0.5, 0.5, -0.5,
+
+			0.5, 0.5, -0.5,
+			0.5, -0.5, -0.5,
+			-0.5, -0.5, -0.5,
+
+			0.5, -0.5, 0.5,
+			-0.5, -0.5, -0.5,
+			0.5, -0.5, -0.5,
+
+			0.5, -0.5, 0.5,
+			-0.5, -0.5, 0.5,
+			-0.5, -0.5, -0.5,
+
+			-0.5, 0.5, 0.5,
+			-0.5, -0.5, 0.5,
+			0.5, -0.5, 0.5,
+
+
+			0.5, 0.5, 0.5,
+			-0.5, 0.5, 0.5,
+			0.5, -0.5, 0.5,
+
+			0.5, 0.5, 0.5,
+			0.5, -0.5, -0.5,
+			0.5, 0.5, -0.5,
+
+			0.5, -0.5, -0.5,
+			0.5, 0.5, 0.5,
+			0.5, -0.5, 0.5,
+
+			0.5, 0.5, 0.5,
+			0.5, 0.5, -0.5,
+			-0.5, 0.5, -0.5,
+
+			0.5, 0.5, 0.5,
+			-0.5, 0.5, -0.5,
+			-0.5, 0.5, 0.5,
+
+		]);
+		const col = new Float32Array([
+			1, 0, 0,
+			1, 0, 0,
+			1, 0, 0,
+
+			1, 0, 0,
+			1, 0, 0,
+			1, 0, 0,
+
+			0, 1, 0,
+			0, 1, 0,
+			0, 1, 0,
+
+			0, 1, 0,
+			0, 1, 0,
+			0, 1, 0,
+
+			0, 0, 1,
+			0, 0, 1,
+			0, 0, 1,
+
+			0, 0, 1,
+			0, 0, 1,
+			0, 0, 1,
+
+			0, 1, 1,
+			0, 1, 1,
+			0, 1, 1,
+
+			0, 1, 1,
+			0, 1, 1,
+			0, 1, 1,
+
+			1, 0, 1,
+			1, 0, 1,
+			1, 0, 1,
+
+			1, 0, 1,
+			1, 0, 1,
+			1, 0, 1,
+
+			1, 1, 0,
+			1, 1, 0,
+			1, 1, 0,
+
+			1, 1, 0,
+			1, 1, 0,
+			1, 1, 0,
+
+		]);
+
+		this.vao = Model.createVertexArray(this.gl)
+
+		this.positionBuffer = this.gl.createBuffer();
+		this.gl.bindBuffer(this.gl.ARRAY_BUFFER, this.positionBuffer);
+		this.gl.bufferData(this.gl.ARRAY_BUFFER, pos, this.gl.STATIC_DRAW);
+		this.gl.enableVertexAttribArray(0);
+		this.gl.vertexAttribPointer(0, 3, this.gl.FLOAT, false, 0, 0);
+
+		this.colorBuffer = this.gl.createBuffer();
+		this.gl.bindBuffer(this.gl.ARRAY_BUFFER, this.colorBuffer);
+		this.gl.bufferData(this.gl.ARRAY_BUFFER, col, this.gl.STATIC_DRAW);
+		this.gl.vertexAttribPointer(1, 3, this.gl.FLOAT, false, 0, 0);
+		this.gl.enableVertexAttribArray(1);
+
+	}
+	render() {
+		this.gl.bindVertexArray(this.vao);
+		this.gl.drawArrays(this.gl.TRIANGLES, 0, 12 * 3);
+	}
+}
