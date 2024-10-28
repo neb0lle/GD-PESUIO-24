@@ -1,6 +1,6 @@
 import Shader from "./Shader";
 import Texture from "./Texture";
-import { Cube } from "./Model";
+import { Cube1, Cube2, Cubes1, Cubes2 } from "./Model";
 import {keys, mouseX, mouseY } from "./Input";
 import {mat4} from "gl-matrix"
 
@@ -25,8 +25,8 @@ if (gl === null) {
 	shaderProgram.createShaders(vert, frag);
 
 	// DATA
-	const model = new Cube(gl);
-	model.setup();
+	const model = new Cubes2(gl);
+	model.setup(100);
 
 	// CONTROLS
 	let posX = 0;
@@ -60,30 +60,11 @@ if (gl === null) {
 	const fieldOfView = (45 * Math.PI) / 180;
 	const aspect = resolution[0] / resolution[1];
 	const zNear = 0.1;
-	const zFar = 100.0;
+	const zFar = 500.0;
 	const projectionMatrix = mat4.create();
 
 	mat4.perspective(projectionMatrix, fieldOfView, aspect, zNear, zFar);
 	const modelViewMatrix = mat4.create();
-
-	mat4.translate(
-		modelViewMatrix,
-		modelViewMatrix,
-		[0.0, 0.0, -10.0]
-	);
-
-	mat4.rotate(
-		modelViewMatrix,
-		modelViewMatrix,
-		45.0 * Math.PI / 180,
-		[0, 0, 0]
-	);
-
-	mat4.scale(
-		modelViewMatrix,
-		modelViewMatrix,
-		[1, 1, 1]
-	);
 
 	gl.uniformMatrix4fv(
 		uPMLocation,
@@ -95,6 +76,17 @@ if (gl === null) {
 		false,
 		modelViewMatrix
 	);
+
+	canvas.addEventListener("click", (event) => {
+		const rect = canvas.getBoundingClientRect();
+		const x = event.clientX - rect.left;
+		const y = event.clientY - rect.top;
+
+		const ndcX = (x / canvas.width) * 2 - 1;
+		const ndcY = 1 - (y / canvas.height) * 2;
+
+		model.addCube(ndcX*10, ndcY*10, -20);
+	});
 
 	// RENDER LOOP
 	gl.clearColor(0, 0, 0, 1);
