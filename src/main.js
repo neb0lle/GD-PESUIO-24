@@ -64,18 +64,18 @@ if (gl === null) {
 	const projectionMatrix = mat4.create();
 
 	mat4.perspective(projectionMatrix, fieldOfView, aspect, zNear, zFar);
-	const modelViewMatrix = mat4.create();
 
 	gl.uniformMatrix4fv(
 		uPMLocation,
 		false,
 		projectionMatrix
 	);
-	gl.uniformMatrix4fv(
-		uMVMLocation,
-		false,
-		modelViewMatrix
-	);
+	// const modelViewMatrix = mat4.create();
+	// gl.uniformMatrix4fv(
+	// 	uMVMLocation,
+	// 	false,
+	// 	modelViewMatrix
+	// );
 
 	canvas.addEventListener("click", (event) => {
 		const rect = canvas.getBoundingClientRect();
@@ -104,19 +104,19 @@ if (gl === null) {
 
 		gl.uniform2f(uPosLocation, posX, posY);
 
-		mat4.rotate(
-			modelViewMatrix,
-			modelViewMatrix,
-			Math.PI / 180,
-			[1, 1, 1]
-		);
-
-		gl.uniformMatrix4fv(
-			uMVMLocation,
-			false,
-			modelViewMatrix
-		);
-
+		// mat4.rotate(
+		// 	modelViewMatrix,
+		// 	modelViewMatrix,
+		// 	Math.PI / 180,
+		// 	[1, 1, 1]
+		// );
+		//
+		// gl.uniformMatrix4fv(
+		// 	uMVMLocation,
+		// 	false,
+		// 	modelViewMatrix
+		// );
+		//
 		gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
 		model.render();
 
