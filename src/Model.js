@@ -198,7 +198,7 @@ export class Cube1 extends Model {
 
 
 
-export class Cube2 extends Model {
+export class Cubes0 extends Model {
 	setup(n) {
 		this.n = n;
         const vertices = new Float32Array([

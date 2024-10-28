@@ -1,6 +1,6 @@
 import Shader from "./Shader";
 import Texture from "./Texture";
-import { Cube1, Cube2, Cubes1, Cubes2 } from "./Model";
+import { Cubes0, Cubes1, Cubes2 } from "./Model";
 import {keys, mouseX, mouseY } from "./Input";
 import {mat4} from "gl-matrix"
 
@@ -25,7 +25,7 @@ if (gl === null) {
 	shaderProgram.createShaders(vert, frag);
 
 	// DATA
-	const model = new Cubes2(gl);
+	const model = new Cubes0(gl);
 	model.setup(100);
 
 	// CONTROLS
